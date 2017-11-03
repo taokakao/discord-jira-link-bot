@@ -7,6 +7,6 @@ JIRA-link bot for Discord
 
 `JIRA_URL` - Url to Jira
 
-`ISSUE_MASK` - Issue mask  
+`JIRA_PROJECT` - Jira project  
 
 `BOTUSERID` - Bot user id
