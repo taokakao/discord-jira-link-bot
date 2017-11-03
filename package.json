@@ -1,0 +1,27 @@
+{
+  "name": "discord-jira-link-bot",
+  "version": "1.0.0",
+  "description": "JIRA-link bot for Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taokakao/discord-jira-link-bot.git"
+  },
+  "author": "taokakao@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taokakao/discord-jira-link-bot/issues"
+  },
+  "homepage": "https://github.com/taokakao/discord-jira-link-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0"
+  }
+}
