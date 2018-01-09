@@ -20,7 +20,7 @@ class JiraIssue {
     }
 
     getIssueDescription(description) {
-        return description ? description.substring(0, 50) + (description.length > 50 ? '..' : '') : '';
+        return description ? description.substring(0, 150) + (description.length > 150 ? '..' : '') : '';
     }
 
     getIssueSubtasks(subtasks) {

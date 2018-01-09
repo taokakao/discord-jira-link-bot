@@ -45,16 +45,18 @@ client.on('message', (message) => {
                     }
                     issueObj = JSON.parse(response.body);
                     
-                    const fields = [
-                        {
+                    const fields = [];
+                    const components = jiraIssue.getIssueComponents(issueObj.fields.components);
+                    if (components) {
+                        fields.push({
                             name: 'Components',
-                            value: jiraIssue.getIssueComponents(issueObj.fields.components),
-                        },
-                        {
-                            name: 'Type and status',
-                            value: `${issueObj.fields.issuetype.name}, ${issueObj.fields.status.name}`,
-                        },
-                    ];
+                            value: components,
+                        });
+                    }
+                    fields.push({
+                        name: 'Type and status',
+                        value: `${issueObj.fields.issuetype.name}, ${issueObj.fields.status.name}`,
+                    });
                     if (issueObj.fields.subtasks && issueObj.fields.subtasks.length > 0) {
                         fields.push({
                             name: 'Subtasks',
