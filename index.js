@@ -67,8 +67,8 @@ client.on('message', (message) => {
                         embed: {
                             color: jiraIssue.getColorByPriority(issueObj.fields.priority.name),
                             author: {
-                                name: `${issue.toUpperCase()} ${issueObj.fields.assignee.displayName}`,
-                                icon_url: issueObj.fields.assignee.avatarUrls['48x48'],
+                                name: `${issue.toUpperCase()} ${issueObj.fields.assignee ? issueObj.fields.assignee.displayName : ''}`,
+                                icon_url: issueObj.fields.assignee ? issueObj.fields.assignee.avatarUrls['48x48'] : '',
                               },
                             description: jiraIssue.getIssueDescription(issueObj.fields.description),
                             fields,
