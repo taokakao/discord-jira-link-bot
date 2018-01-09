@@ -16,11 +16,11 @@ class JiraIssue {
     }
 
     getIssueComponents(components) {
-        return components ? components.map((c) => c.name).join(', ') : 'no components set';
+        return components ? components.map((c) => c.name).join(' • ') : 'no components set';
     }
 
-    getIssueDescription(description) {
-        return description ? description.substring(0, 150) + (description.length > 150 ? '..' : '') : '';
+    getIssueDescription(description, navLink) {
+        return description ? description.substring(0, 150) + (description.length > 150 ? `.. [more](${navLink})` : '') : '';
     }
 
     getIssueSubtasks(subtasks) {

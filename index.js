@@ -39,14 +39,19 @@ client.on('message', (message) => {
         for (const issue of issues) {
             const url = `${jiraUrl}/rest/api/2/issue/${issue}?expand=renderedFields`;
             request({ url, headers : { "Authorization": `Basic ${jiraToken}` } }, (error, response, body) => {
+                    const issueUrl = `${jiraUrl}/browse/${issue}`;
                     if (error) {
-                        channel.send(`${jiraUrl}/browse/${issue}`);
+                        channel.send(issueUrl);
                         return;
                     }
                     issueObj = JSON.parse(response.body);
-                    
-                    const fields = [];
                     const components = jiraIssue.getIssueComponents(issueObj.fields.components);
+                    const parent = issueObj.fields.parent;
+                    const assignee = issueObj.fields.assignee;
+                    const reporter = issueObj.fields.reporter;
+                    const subtasks = issueObj.fields.subtasks;
+
+                    const fields = [];
                     if (components) {
                         fields.push({
                             name: 'Components',
@@ -55,29 +60,35 @@ client.on('message', (message) => {
                     }
                     fields.push({
                         name: 'Type and status',
-                        value: `${issueObj.fields.issuetype.name}, ${issueObj.fields.status.name}`,
+                        value: `${issueObj.fields.issuetype.name}                                   ${issueObj.fields.status.name}`,
                     });
-                    if (issueObj.fields.subtasks && issueObj.fields.subtasks.length > 0) {
+                    if (subtasks && subtasks.length > 0) {
                         fields.push({
                             name: 'Subtasks',
-                            value: jiraIssue.getIssueSubtasks(issueObj.fields.subtasks),
+                            value: jiraIssue.getIssueSubtasks(subtasks),
+                        });
+                    }
+                    if (parent) {
+                        fields.push({
+                            name: 'Parent',
+                            value: `[${parent.key} ${parent.fields.summary}](${jiraUrl}/browse/${parent.key})`,
                         });
                     }
                     channel.send({
                         embed: {
                             color: jiraIssue.getColorByPriority(issueObj.fields.priority.name),
                             author: {
-                                name: `${issue.toUpperCase()} ${issueObj.fields.assignee ? issueObj.fields.assignee.displayName : ''}`,
-                                icon_url: issueObj.fields.assignee ? issueObj.fields.assignee.avatarUrls['48x48'] : '',
+                                name: `${issue.toUpperCase()} ${assignee ? assignee.displayName : ''}`,
+                                icon_url: assignee ? assignee.avatarUrls['48x48'] : '',
                               },
-                            description: jiraIssue.getIssueDescription(issueObj.fields.description),
+                            description: jiraIssue.getIssueDescription(issueObj.fields.description, issueUrl),
                             fields,
                             title: `${issueObj.fields.summary}`,
-                            url: `${jiraUrl}/browse/${issue}`,
+                            url: issueUrl,
                             timestamp: issueObj.fields.created,
                             footer: {
-                                icon_url: issueObj.fields.reporter.avatarUrls['48x48'],
-                                text: `by ${issueObj.fields.reporter.displayName}`,
+                                icon_url: reporter.avatarUrls['48x48'],
+                                text: `by ${reporter.displayName}`,
                               }
                         },
                     });
