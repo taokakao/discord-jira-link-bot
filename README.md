@@ -7,6 +7,8 @@ JIRA-link bot for Discord
 
 `JIRA_URL` - Url to Jira
 
+`JIRA_TOKEN` - Basic auth token for Jira
+
 `JIRA_PROJECT` - Jira project  
 
 `BOTUSERID` - Bot user id
