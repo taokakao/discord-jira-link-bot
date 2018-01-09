@@ -51,6 +51,7 @@ client.on('message', (message) => {
                     const reporter = issueObj.fields.reporter;
                     const subtasks = issueObj.fields.subtasks;
                     const attachment = issueObj.fields.attachment;
+                    const status = issueObj.fields.status.name;
 
                     const fields = [];
                     if (components) {
@@ -61,7 +62,7 @@ client.on('message', (message) => {
                     }
                     fields.push({
                         name: 'Type and status',
-                        value: `${issueObj.fields.issuetype.name}                                   ${issueObj.fields.status.name}`,
+                        value: `${issueObj.fields.issuetype.name}                                   ${jiraIssue.formatByStatus(status, status)}`,
                     });
                     if (subtasks && subtasks.length > 0) {
                         fields.push({
@@ -84,7 +85,7 @@ client.on('message', (message) => {
                               },
                             description: jiraIssue.getIssueDescription(issueObj.fields.description, issueUrl),
                             fields,
-                            title: `${issueObj.fields.summary}`,
+                            title: `${jiraIssue.formatByStatus(issueObj.fields.summary, status)}`,
                             url: issueUrl,
                             timestamp: issueObj.fields.created,
                             footer: {

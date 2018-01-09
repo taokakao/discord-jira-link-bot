@@ -30,6 +30,10 @@ class JiraIssue {
         }
         return items.join('\n');
     }
+
+    formatByStatus(value, status) {
+        return `${status === 'Done' ? '~~' : ''}${status === 'In Progress' ? '*' : ''}${value}${status === 'In Progress' ? '*' : ''}${status === 'Done' ? '~~' : ''}`;
+    }
 }
 
 module.exports = JiraIssue;
