@@ -50,6 +50,7 @@ client.on('message', (message) => {
                     const assignee = issueObj.fields.assignee;
                     const reporter = issueObj.fields.reporter;
                     const subtasks = issueObj.fields.subtasks;
+                    const attachment = issueObj.fields.attachment;
 
                     const fields = [];
                     if (components) {
@@ -74,7 +75,7 @@ client.on('message', (message) => {
                             value: `[${parent.key} ${parent.fields.summary}](${jiraUrl}/browse/${parent.key})`,
                         });
                     }
-                    channel.send({
+                    const message = {
                         embed: {
                             color: jiraIssue.getColorByPriority(issueObj.fields.priority.name),
                             author: {
@@ -89,9 +90,10 @@ client.on('message', (message) => {
                             footer: {
                                 icon_url: reporter.avatarUrls['48x48'],
                                 text: `by ${reporter.displayName}`,
-                              }
+                              },
                         },
-                    });
+                    };
+                    channel.send(message);
                 });
         }
     }
