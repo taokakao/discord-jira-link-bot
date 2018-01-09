@@ -16,7 +16,7 @@ class JiraIssue {
     }
 
     getIssueComponents(components) {
-        return components ? components.map((c) => c.name).join(',') : 'no components set';
+        return components ? components.map((c) => c.name).join(', ') : 'no components set';
     }
 
     getIssueDescription(description) {
