@@ -32,7 +32,21 @@ class JiraIssue {
     }
 
     formatByStatus(value, status) {
-        return `${status === 'Done' ? '~~' : ''}${status === 'In Progress' ? '*' : ''}${value}${status === 'In Progress' ? '*' : ''}${status === 'Done' ? '~~' : ''}`;
+        let result = value;
+        if (status === 'Done') {
+            result = this.wrapBy(result, '~~');
+        }
+        if (status === 'In Progress') {
+            result = this.wrapBy(result, '*');
+        }
+        if (status === 'on hold') {
+            result = this.wrapBy(result, '**');
+        }
+        return result;
+    }
+
+    wrapBy(value, str) {
+        return `${str}${value}${str}`;
     }
 }
 
