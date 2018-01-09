@@ -1,9 +1,8 @@
-
 class JiraIssue {
     constructor() {
-
+        //
     }
-    
+
     getColorByPriority(priority) {
         switch (priority) {
             default:
@@ -27,7 +26,6 @@ class JiraIssue {
     getIssueSubtasks(subtasks) {
         const items = [];
         for (const s of subtasks) {
-            console.log(s);
             items.push(`${s.key} ${s.fields.summary} - ${s.fields.status.name}`)
         }
         return items.join('\n');
