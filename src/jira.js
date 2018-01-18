@@ -12,6 +12,8 @@ class JiraIssue {
                 return 0x30873A;
             case 'High':
                 return 0xCC0814;
+            case 'Critical':
+                return 0xCC0814;
         }
     }
 
