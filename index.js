@@ -40,6 +40,9 @@ client.on('message', (message) => {
     const text = message.content;
     const isMe = message.author.id == botUserId;
     const ignore = text.indexOf('no-jira-links') !== -1;
+    if (ignore) {
+        channel.send('Okaaay... As you wish... Sure...');
+    }
     if (!isMe && !ignore) {
         for (const p of issueNameRegexps) {
             if (p.regexp.test(text)) {
