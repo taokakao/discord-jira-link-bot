@@ -1,5 +1,5 @@
 # discord-jira-link-bot
-JIRA-link bot for Discord
+JIRA-link bot for Discord. `no-jira-links` in message make bot ignore that one specific message.
 
 ### ENV VARS
 
@@ -9,6 +9,6 @@ JIRA-link bot for Discord
 
 `JIRA_TOKEN` - Basic auth token for Jira
 
-`JIRA_PROJECTS` - Comma-separated Jira project prefixes  
+`JIRA_PROJECTS` - Comma-separated Jira project prefixes
 
 `BOTUSERID` - Bot user id
