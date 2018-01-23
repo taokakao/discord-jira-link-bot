@@ -39,6 +39,7 @@ client.on('message', (message) => {
     const channel = message.channel;
     const text = message.content;
     const isMe = message.author.id == botUserId;
+    const ignore = text.indexOf('disable-jira-links') === -1;
     if (!isMe) {
         for (const p of issueNameRegexps) {
             if (p.regexp.test(text)) {
@@ -60,7 +61,7 @@ client.on('message', (message) => {
                             const subtasks = issueObj.fields.subtasks;
                             const attachment = issueObj.fields.attachment;
                             const status = issueObj.fields.status.name;
-        
+
                             const fields = [];
                             if (components) {
                                 fields.push({
