@@ -40,7 +40,7 @@ client.on('message', (message) => {
     const text = message.content;
     const isMe = message.author.id == botUserId;
     const ignore = text.indexOf('disable-jira-links') === -1;
-    if (!isMe) {
+    if (!isMe && !ignore) {
         for (const p of issueNameRegexps) {
             if (p.regexp.test(text)) {
                 const issues = text.match(p.regexp).map((issue) => `${issue}`);
